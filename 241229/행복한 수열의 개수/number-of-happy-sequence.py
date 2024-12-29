@@ -17,8 +17,9 @@ def check_col(matrix, m, col, r1, r2):
     prevNum = 0
     for row in range(r1, r2 + 1):
         num = matrix[row][col]
-        if dupNum == num:
+        if prevNum == num:
             dupNum += 1
+        prevNum = num
 
     if dupNum >= m:
         return True
