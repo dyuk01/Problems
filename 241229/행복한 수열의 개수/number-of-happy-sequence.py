@@ -6,13 +6,12 @@ def check_row(matrix, m, row, c1, c2):
         num = matrix[row][col]
         if prevNum == num:
             dupNum += 1
+            if dupNum >= m:
+                return True
         else:
             dupNum = 1
         prevNum = num
-
-    if dupNum >= m:
-        return True
-
+    return False
 # Check for consecutive duplicate numbers in a column
 def check_col(matrix, m, col, r1, r2):
     dupNum = 1
@@ -21,12 +20,12 @@ def check_col(matrix, m, col, r1, r2):
         num = matrix[row][col]
         if prevNum == num:
             dupNum += 1
+            if dupNum >= m:
+                return True
         else:
             dupNum = 1
         prevNum = num
-
-    if dupNum >= m:
-        return True
+    return False
 
 
 # Initialize
