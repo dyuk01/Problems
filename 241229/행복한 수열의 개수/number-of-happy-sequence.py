@@ -1,7 +1,7 @@
 # Check for consecutive duplicate numbers in a row
 def check_row(matrix, m, row, c1, c2):
     dupNum = 1
-    prevNum = 0
+    prevNum = -1
     for col in range(c1, c2 + 1):
         num = matrix[row][col]
         if prevNum == num:
@@ -16,7 +16,7 @@ def check_row(matrix, m, row, c1, c2):
 # Check for consecutive duplicate numbers in a column
 def check_col(matrix, m, col, r1, r2):
     dupNum = 1
-    prevNum = 0
+    prevNum = -1
     for row in range(r1, r2 + 1):
         num = matrix[row][col]
         if prevNum == num:
