@@ -1,9 +1,8 @@
-def get_coin(matrix, row, col):
+def get_coin(matrix, r1, c1, r2, c2):
     goldNum = 0
-    for r in range(row + 3):
-        for c in range(col + 3):
-            if matrix[r][c] == 1:
-                goldNum += 1
+    for r in range(r1, r2 + 1):
+        for c in range(c1, c2 + 1):
+            goldNum += matrix[r][c]
     return goldNum
 
 # Initialize
@@ -18,9 +17,9 @@ for _ in range(n):
     matrix.append(row)
 
 # Naive approach
-for r in range(n - 2):
-    for c in range(n - 2):
-        money = get_coin(matrix, r, c)
-        max_money = max(money, max_money)
+for row in range(n - 2):
+    for col in range(n - 2):
+        max_money = max(max_money, get_coin(matrix,row,col,row+2, col+2)) 
+
 
 print (max_money)
