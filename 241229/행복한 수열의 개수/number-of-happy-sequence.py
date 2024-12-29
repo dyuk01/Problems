@@ -6,6 +6,8 @@ def check_row(matrix, m, row, c1, c2):
         num = matrix[row][col]
         if prevNum == num:
             dupNum += 1
+        else:
+            dupNum = 1
         prevNum = num
 
     if dupNum >= m:
@@ -19,6 +21,8 @@ def check_col(matrix, m, col, r1, r2):
         num = matrix[row][col]
         if prevNum == num:
             dupNum += 1
+        else:
+            dupNum = 1
         prevNum = num
 
     if dupNum >= m:
