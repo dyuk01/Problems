@@ -38,28 +38,28 @@ def l_block():
     maxSum = 0
 
     def noRotation(row, col):
-        if col + 1 >= n or row + 1 >= n:
+        if col + 1 >= m or row + 1 >= n:
             return -1
         
         maxSum = matrix[row][col] + matrix[row + 1][col] + matrix[row + 1][col + 1]
         return maxSum
 
     def rightRotation(row, col):
-        if col + 1 >= n or row + 1 >= n:
+        if col + 1 >= m or row + 1 >= n:
             return -1
 
         maxSum = matrix[row][col] + matrix[row + 1][col] + matrix[row][col + 1]
         return maxSum
 
     def leftRotation(row, col):
-        if col + 1 >= n or row + 1 >= n:
+        if col + 1 >= m or row + 1 >= n:
             return -1
     
         maxSum = matrix[row + 1][col] + matrix[row + 1][col + 1] + matrix[row][col + 1]
         return maxSum
 
     def transpose(row, col):
-        if col + 1 >= n or row + 1 >= n:
+        if col + 1 >= m or row + 1 >= n:
             return -1
 
         maxSum = matrix[row][col] + matrix[row][col + 1] + matrix[row + 1][col + 1]
