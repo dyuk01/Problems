@@ -13,7 +13,7 @@ def is_valid(row):
 # Fills empty space in a grid with a block.
 def fill(row):
     for col in range(k, k + m):
-        grid[row][col] = '1'
+        grid[row][col] = 1
 
 
 for i in range(n - 1, -1, -1):
