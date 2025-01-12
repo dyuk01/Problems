@@ -2,25 +2,46 @@ n = int(input())
 a = list(map(int, input().split()))
 b = list(map(int, input().split()))
 
-d = {}
-i = 0
+# d = {}
 
-# Iter through a and add its elements into d.
-for num in a:
-    if num not in d:
-        d[num] = True
-    i += 1
+# # Iter through a and add its elements into d.
+# i = 0
+# for num in a:
+#     if num not in d:
+#         d[num] = True
+#     i += 1
 
-j = 0
-# Iter through b and check if its value exits in d.
-for num in b:
-    if num not in d:
-        print("No")
-        break
-    j += 1
+# # Iter through b and check if its value exits in d.
+# j = 0
+# for num in b:
+#     if num not in d:
+#         print("No")
+#         break
+#     j += 1
 
-if i == j:
+# if i == j:
+#     print("Yes")
+# else:
+#     print("No")
+
+
+def is_valid():
+    d = {}
+
+    for num in a:
+        if num not in d:
+            d[num] = True
+    
+    for num in b:
+        if num not in d:
+            return False
+    
+    return True
+
+if is_valid():
     print("Yes")
+else:
+    print("No")
 
 
 
