@@ -9,4 +9,7 @@ m = c - 11
 
 res = day + hr + m
 
+if res < 0:
+    res = -1
+
 print(res)
