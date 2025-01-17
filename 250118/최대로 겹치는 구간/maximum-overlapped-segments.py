@@ -16,10 +16,12 @@ for x1, x2 in segments:
     if min_x < 0:
         x1 += (min_x) * -1
         x2 += (min_x) * -1
-    if min_x > 0:
+    else:
         x1 -= min_x
         x2 -= min_x
-    for i in range(x1, x2 + 1):
+
+    # Iterate through overlaps    
+    for i in range(x1, x2):
         overlaps[i] += 1
 
 res = 0
