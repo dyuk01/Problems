@@ -19,16 +19,12 @@ for y in y2:
     if y > max_y:
         max_y = y
 
-grid = [[0 for _ in range(max_x - 1)] for _ in range(max_y - 1)]
+grid = [[0 for _ in range(max_x)] for _ in range(max_y)]
 
 # Take input and mark occupied as "1".
 # Last input will set to "0".
 rec_count = 1
 for x, y, dx, dy, in zip(x1, y1, x2, y2):
-    x -= 1
-    y -= 1
-    dx -= 1
-    dy -= 1
     if (rec_count != 3):
         for y_pos in range(y, dy):
             for x_pos in range(x, dx):
