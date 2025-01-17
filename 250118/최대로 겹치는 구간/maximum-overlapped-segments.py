@@ -13,7 +13,7 @@ for x1, x2 in segments:
 overlaps = [0 for _ in range(min_x, max_x + 1)]
 # 0-index the segment numbers.
 for x1, x2 in segments:
-    if x1 < 0:
+    if min_x < 0:
         x1 += (min_x) * -1
         x2 += (min_x) * -1
     if min_x > 0:
