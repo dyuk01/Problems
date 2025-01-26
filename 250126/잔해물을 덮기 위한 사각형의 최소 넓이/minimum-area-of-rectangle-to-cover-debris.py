@@ -4,7 +4,7 @@ x1[1], y1[1], x2[1], y2[1] = map(int, input().split())
 
 
 def is_inbound(x, y):
-    return x1[0] < x < x2[0] and y1[0] < y < y2[0]
+    return x1[0] <= x <= x2[0] and y1[0] <= y <= y2[0]
 
 def get_area(x1, y1, x2, y2):
     return (x2 - x1) * (y2 - y1)
@@ -18,21 +18,31 @@ else:
         # Case 2-1: New rectangle greater than original.
         # output: 0
         print(0)
-    else:
+    elif (x1[0] < x1[1] and x2[1] < x2[0] and y1[1] <= y1[0] and y2[0] <= y2[1]) or (x1[1] <= x1[0] and x2[0] <= x2[1] and y1[0] < y1[1] and y2[1] < y2[0]):
         # Case 2-2: Split middle.
         # output: Area(R0)
-        if (x1[0] < x1[1] and x2[1] < x2[0] and y1[1] <= y1[0] and y2[0] <= y2[1]) or (x1[1] <= x1[0] and x2[0] <= x2[1] and y1[0] < y1[1] and y2[1] < y2[0]):
-            print(get_area(x1[0], y1[0], x2[0], y2[0]))
-        else:
-            # Case 2-3: Cut edge.
-            # output: Area(R*)
+        print(get_area(x1[0], y1[0], x2[0], y2[0]))
+    elif x2[1] < x1[0] or x1[1] > x2[0] or y2[1] < y1[0] or y1[1] > y2[0]:
+        # Case 2-3: Out of bound
+        # output: Area(R)
+        print(get_area(x1[0], y1[0], x2[0], y2[0]))
+    else:
+        # Case 2-4: Cut edge.
+        # output: Area(R*)
+        if (x1[1] <= x1[0] < x2[1] and y1[1] < y1[0] and y2[0] < y2[1]):
             # Cut left
             print(get_area(x2[1], y1[0], x2[0], y2[0]))
+
+        if (y1[1] <= y1[0] < y2[1] and x1[1] < x1[0] and x2[0] < x2[1]):
             # Cut bottom
             print(get_area(x1[0], y2[1], x2[0], y2[0]))
+
+        if (x1[1] < x2[0] <= x2[1] and y1[1] < y1[0] and y2[0] < y2[1]):
             # Cut right
             print(get_area(x1[0], y1[0], x1[1], y2[0]))
+
+        if (y1[1] < y2[0] <= y2[1] and x1[1] < x1[0] and x2[0] < x2[1]):
             # Cut top
-            print(get_area(x1[0], y1[0], x2[0], y1[1]))
+            print(get_area(x1[0], y1[0], x2[0], y[1]))
 
 
