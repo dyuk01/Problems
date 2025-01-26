@@ -43,6 +43,6 @@ else:
 
         if (y1[1] < y2[0] <= y2[1] and x1[1] < x1[0] and x2[0] < x2[1]):
             # Cut top
-            print(get_area(x1[0], y1[0], x2[0], y[1]))
+            print(get_area(x1[0], y1[0], x2[0], y1[1]))
 
 
