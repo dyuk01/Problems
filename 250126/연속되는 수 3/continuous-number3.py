@@ -2,7 +2,7 @@ N = int(input())
 arr = [int(input()) for _ in range(N)]
 
 consec = 1
-res = 0
+res = 1
 
 # Iter through array and determine consecutiveness
 # with the prodcut of prev and curr number.
@@ -13,11 +13,8 @@ for i in range(1, len(arr)):
         consec += 1
     else:
         consec = 1
-    
-    
     if consec > res:
         res = consec
-
     prev_num = curr_num
 
 print(res)
