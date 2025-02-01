@@ -10,46 +10,31 @@ for _ in range(m):
     direction, time = input().split()
     b.append((direction, int(time)))
 
-# Write your code here!
+def define_direction(direction):
+    if direction == "L":
+        return -1
+    return 1
 
-# 1. Find the max time for a and b
-max_time = 1
-for direction, time in a:
-    max_time += time
+# 1. Initialize array according to their max time
+def init_array(arr):
+    movement = []
+    pos = 0
+    for direction, time in arr:
+       for _ in range(time):
+        pos += define_direction(direction)
+        movement.append(pos) 
 
-# 2. Initialize array according to their max time
-a_movement = [0] * max_time
-curr_a = 0
-a_idx = 1
-for direction, time in a:
-    for _ in range(time):
-        if direction == "L":
-            curr_a -= 1
-        else:
-            curr_a += 1
-        a_movement[a_idx] = curr_a 
-        a_idx += 1
+    return movement    
 
-b_movement = [0] * max_time
-curr_b = 0
-b_idx = 1
-for direction, time in b:
-    for _ in range(time):
-        if direction == "L":
-            curr_b -= 1
-        else:
-            curr_b += 1
-        b_movement[b_idx] = curr_b 
-        b_idx += 1
+a_movement = init_array(a)
+b_movement = init_array(b)
 
 # 3. Record each position in the array, then return
 # when the pos for A and B match
-res = float('inf')
-for i in range(1, max_time):
-    if a_movement[i] == b_movement[i]:
-        res = i
-        print(i)
-        break
-
-if res == float('inf'):
-    print(-1)
+def solution():
+    for i in range(len(a_movement)):  
+        if a_movement[i] == b_movement[i]:
+            return i + 1
+    return -1
+        
+print(solution())
