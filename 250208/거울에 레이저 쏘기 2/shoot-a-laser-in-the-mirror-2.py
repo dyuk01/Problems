@@ -3,97 +3,79 @@ grid = [list(input()) for _ in range(n)]
 k = int(input())
 
 # Each cell is a mirror consisted of \ or /
-# Amount of lasers = 4 * N
+# Potential starting point = 4 * N
 # Result : amount of laser reflections
 
-# n : amount of mirrors per side
-# Descriptions of mirror
-# k = Mirror index of starting laser
-# Index starts from top left and rotates clockwise
+# n : size
 
-# Function checks coordinate's bound
-# Output : Bool
-def is_inBound(i, j):
+# Descriptions of mirror:
+#   k = Starting position
+#   Index starts from top left and rotates clockwise
+
+# is_inbound checks coordinate's bound
+def is_inbound(i, j):
     return i >= 0 and j >= 0 and i < n and j < n
 
-# Function that sets laser's initial direction
-# Output : (i, j)
-def setDirection(d):
-    if d == "N":
-        return 1, 0
-    elif d == "E":
-        return 0, -1
-    elif d == "S":
-        return -1, 0
-    elif d == "W":
-        return 0, 1
-
-# Function that calculates the mirror's initial index
-# Output : mirror coordinate(i,j), direction
-def findMirrorIdx(k):
+# init_coord calculates initial position and laser's direction
+def init_coord(k):
     # 0-index
     k -= 1
+    q = k // n
+    r = k % n
+
     # Case1: Laser comes from top
-    if k < n:
-        return 0, k, "N"
+    if q == 0:
+        return 0, r, 1, 0
     # Case2: Laser comes from right
-    elif k < 2 * n:
-        return k - n, k % n, "E"
+    elif q == 1:
+        return r, n - 1, 0, -1
     # Case3: Laser comes from bottom
-    elif k < 3 * n:
-        return n - 1, 3 * n - (k + 1), "S"
+    elif q == 2:
+        return n - 1, n - 1 - r, -1, 0
     # Case4: Laser comes from left
-    elif k < 4 * n:
-        return 4 * n - (k + 1), 0, "W"
+    elif q == 3:
+        return n - 1 - r, 0, 0, 1
+
+# reflect changes the laser's direction based on mirror's type
+def reflect(mirror, di, dj):
+    if mirror == '\\':
+        if di == 0 and dj == 1:
+            di = 1
+            dj = 0
+        elif di == 0 and dj == -1:
+            di = -1
+            dj = 0
+        elif di == 1 and dj == 0:
+            di = 0
+            dj = 1
+        elif di == -1 and dj == 0:
+            di = 0
+            dj = -1
+
+    elif mirror == '/':
+        if di == 0 and dj == 1:
+            di = -1
+            dj = 0
+        elif di == 0 and dj == -1:
+            di = 1
+            dj = 0
+        elif di == 1 and dj == 0:
+            di = 0
+            dj = -1
+        elif di == -1 and dj == 0:
+            di = 0
+            dj = 1
+    
+    return di, dj
 
 # Main Algorithm.
 # Find the starting mirror index and laser's direction.
-i, j, direction = findMirrorIdx(k)
-di, dj = setDirection(direction)
+i, j, di, dj = init_coord(k)
 res = 0
 
-while is_inBound(i, j):
-    if di == 0 and dj == 1:
-        # Case1: Laser moves right
-        # \ : Moves down
-        # / : Moves up
-        if grid[i][j] == '\\':
-            di = 1
-            dj = 0
-        elif grid[i][j] == '\/':
-            di = -1
-            dj = 0
-    elif di == 0 and dj == -1:    
-        # Case2: Laser moves left
-        # \ : Moves up
-        # / : Moves down
-        if grid[i][j] == '\\':
-            di = -1
-            dj = 0
-        elif grid[i][j] == '\/':
-            di = 1
-            dj = 0
-    elif di == -1 and dj == 0:
-        # Case3: Laser moves up
-        # \ : Moves left
-        # / : Moves right
-        if grid[i][j] == '\\':
-            di = 0
-            dj = -1
-        elif grid[i][j] == '\/':
-            di = 0
-            dj = 1
-    elif di == 1 and dj == 0:
-        # Case4: Laser moves down
-        # \ : Moves right
-        # / : Moves left
-        if grid[i][j] == '\\':
-            di = 0
-            dj = 1
-        elif grid[i][j] == '\/':
-            di = 0
-            dj = -1
+while is_inbound(i, j):
     res += 1
+    di, dj = reflect(grid[i][j], di, dj)
     i += di
     j += dj
 
