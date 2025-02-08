@@ -13,8 +13,8 @@ k = int(input())
 
 # Function checks coordinate's bound
 # Output : Bool
-def is_outOfBound(i, j):
-    return i < 0 or j < 0 or i >= n or j >= n
+def is_inBound(i, j):
+    return i >= 0 and j >= 0 and i < n and j < n
 
 # Function that sets laser's initial direction
 # Output : (i, j)
@@ -52,7 +52,7 @@ i, j, direction = findMirrorIdx(k)
 di, dj = setDirection(direction)
 res = 0
 
-while not is_outOfBound(i, j):
+while is_inBound(i, j):
     if di == 0 and dj == 1:
         # Case1: Laser moves right
         # \ : Moves down
