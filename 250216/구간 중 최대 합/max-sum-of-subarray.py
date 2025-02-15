@@ -7,7 +7,7 @@ def is_out_of_bound(i):
 max_sum = 0
 for i in range(n):
     curr_sum = 0
-    for di in range(k):
+    for di in range(i, i + k):
         if is_out_of_bound(di):
             break
         curr_sum += numbers[di]
