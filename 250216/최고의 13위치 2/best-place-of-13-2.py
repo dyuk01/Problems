@@ -8,31 +8,31 @@ board = [list(map(int, input().split())) for _ in range(n)]
 
 # output will be 0~6, where you can just return immediately at 6
 
-# Function that checks coordinate's out of bound
-def is_out_of_bound(i, j):
-    return i < 0 or j < 0 or i >= n or j >= n
-
-# Function that checks amount of coins in 1*3 block 
-def check_coin(i, j):
+def get_coin(i,j):
     coin = 0
     for dj in range(3):
         new_j = j + dj
-        if is_out_of_bound(i, new_j):
-            return 0
-        elif board[i][new_j] == 1:
+        if board[i][new_j] == 1:
             coin += 1
-    
     return coin
 
-coin1 = 0
-coin2 = 0
+# Find the first block with the most coin
+max_coin1 = 0
+coin1_i, coin1_j = 0, 0
 for i in range(n):
-    for j in range(n):
-        if coin1 < check_coin(i,j):
-            coin1 = check_coin(i,j)
+    for j in range(n - 2):
+        if max_coin1 < get_coin(i,j):
+            max_coin1 = get_coin(i,j)
+            coin1_i, coin1_j = i, j
+
+# Then, find the second block with the most coin
+max_coin2 = 0
+for i in range(n):
+    for j in range(n - 2):
+        if coin1_i == i and coin1_j <= j <= coin1_j + 2 :
             continue
         
-        if coin2 < check_coin(i,j):
-            coin2 = check_coin(i,j)
+        max_coin2 = max(max_coin2, get_coin(i,j))
 
-print(coin1 + coin2)
+
+print(max_coin1 + max_coin2)
