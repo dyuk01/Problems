@@ -20,4 +20,6 @@ for i in range(n - 1):
         appropriate_lines -= 2
         i += 2
 
+if appropriate_lines < 0:
+    appropriate_lines = 0
 print(appropriate_lines)
