@@ -14,7 +14,12 @@ def is_interesting_num(num):
         else:
             unique_digits[digit] = 1
     
-    return len(unique_digits) == 2
+    if len(unique_digits) != 2:
+        return False
+    
+    counts = list(unique_digits.values())
+
+    return 1 in counts
 
 res = 0
 # Iterate from X and Y
