@@ -34,7 +34,7 @@ def sol():
             remain = set(points) - crossed
             if not remain:
                 return 1
-            remain_y = set([1] for p in remain)
+            remain_y = set(p[1] for p in remain)
             if len(remain_y) == 1:
                 return 1
     
