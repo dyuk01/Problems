@@ -5,7 +5,16 @@ X, Y = map(int, input().split())
 
 # Check if number is interesting number
 def is_interesting_num(num):
-    return len(set(str(num))) == 2
+    str_num = str(num)
+    unique_digits = {}
+
+    for digit in str_num:
+        if digit in unique_digits:
+            unique_digits[digit] += 1
+        else:
+            unique_digits[digit] = 1
+    
+    return len(unique_digits) == 2
 
 res = 0
 # Iterate from X and Y
