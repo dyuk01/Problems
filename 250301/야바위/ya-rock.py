@@ -2,15 +2,16 @@ n = int(input())
 moves = [tuple(map(int, input().split())) for _ in range(n)]
 
 # Please write your code here.
-scores = {i: 0 for i in range(1,4)}
+max_score = -1
+for index in range(1, 4):
+    cups = [0] * 4
+    cups[0] = -1
+    cups[index] = 1
+    score = 0
+    for a,b,c in moves:
+        cups[a], cups[b] = cups[b], cups[a]
+        score += cups[c]
+    
+    max_score = max(max_score, score)
 
-for a,b,c in moves:
-    if c == 3:
-        continue
-    elif c == 1:
-        scores[b] += 1
-    elif c == 2:
-        scores[a] += 1
-
-max_key = max(scores, key=scores.get)
-print(scores[max_key])
+print(max_score)
