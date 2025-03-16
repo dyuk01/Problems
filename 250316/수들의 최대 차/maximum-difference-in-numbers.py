@@ -42,8 +42,8 @@ def solution() -> int:
     best_len = -float("inf")
     for l in range(n - 1):
         for r in range(l + 1, n):
-            if arr[r] - arr[l] < k:
+            if arr[r] - arr[l] <= k:
                 best_len = max(best_len, r - l + 1)
     return best_len
 
-print(solution() + 1)
+print(solution())
