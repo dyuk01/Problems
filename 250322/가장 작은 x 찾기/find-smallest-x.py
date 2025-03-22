@@ -12,8 +12,6 @@ intervals = []
 for i in range(n):
     factor = pow(2, i+1)
     ceil = math.ceil(a[i] / factor)
-    floor = math.floor(b[i] / factor)
-    intervals.append((ceil, floor))
+    intervals.append(ceil)
 
-res = max(r[0] for r in intervals)
-print(res)
+print(max(intervals))
