@@ -26,4 +26,6 @@ ceil = math.ceil(a[n - 1] / pow(2, n))
 floor = math.floor(b[n - 1] / pow(2, n))
 
 for i in range(ceil, floor + 1):
-    print(i)
+    res.append(i)
+
+print(min(res))
