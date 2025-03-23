@@ -11,11 +11,9 @@ for i in range(n):
 max_min_dist = 0
 
 for i in range(n - 1):
-    if seats[i] == '0':
-        temp_occupied = occupied + [i]
     for j in range(i + 1, n):
-        if seats[j] == '0':
-            temp_occupied = occupied + [j]
+        if seats[i] == '0' and seats[j] == '0':
+            temp_occupied = occupied + [i] + [j]
             temp_occupied.sort()
 
             min_dist = float('inf')
@@ -26,3 +24,4 @@ for i in range(n - 1):
             max_min_dist = max(max_min_dist, min_dist)
 
 print(max_min_dist)
+
