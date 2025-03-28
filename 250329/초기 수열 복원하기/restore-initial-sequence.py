@@ -12,7 +12,7 @@ def restore_seq(arr)-> list:
         res.append(init_num)
         for j in arr:
             num = j - init_num
-            if num not in res and num != 0:
+            if num not in res and num > 0:
                 res.append(num)
             else:
                 res.clear()
