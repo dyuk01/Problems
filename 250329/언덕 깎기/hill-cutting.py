@@ -7,8 +7,8 @@ def carve_hills()-> int:
     low, high = min(heights), max(heights)
     height_diff = (high - low) - 17
 
-    if (height_diff < 0):
-        return -1
+    if (height_diff <= 0):
+        return 0
 
     for dl in range(1, height_diff):
         dh = height_diff - dl
