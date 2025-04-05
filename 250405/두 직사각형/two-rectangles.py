@@ -24,6 +24,6 @@ def sol():
         if b2 <= y1:
             return "intersecting"
     
-    return "nonintersecting"
+    return "overlapping"
 
 print(sol())
