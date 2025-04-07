@@ -15,7 +15,6 @@ while diff > k:
     #         low_cost += 1
     low_raise_est_cost = sum([1 if num < min_num + 1 else 0 for num in arr])
 
-
     # Calculate the cost of reducing maximum 
     # high_cost = 0
     # for num in arr:
@@ -23,15 +22,13 @@ while diff > k:
     #         high_cost += 1
     high_reduce_est_cost = sum([1 if num > max_num - 1 else 0 for num in arr])
     
-    
     # Adjust the min/max and the cost
     if low_raise_est_cost <= high_reduce_est_cost:
         min_num += 1
-        est_cost += low_raise_est_cost
     else:
         max_num -= 1
-        est_cost += high_reduce_est_cost
     
+    est_cost += min(low_raise_est_cost, high_reduce_est_cost)
     diff = max_num - min_num
 
 print(est_cost)
