@@ -3,14 +3,19 @@ messages = [tuple(input().split()) for _ in range(m)]
 c = [msg[0] for msg in messages]
 u = [int(msg[1]) for msg in messages]
 
+p -= 1
 # Please write your code here.
 
 # 'A' -> N amount of alphabets
 # If new person arrive -> reads previous messages
 
 # M amount of message informations
+
+if u[p - 1] == 0:
+    return
+
 # Find who did not read the pth message
-person = [chr(i) for i in range(ord('A'), ord('A') + n)]
+people = [chr(i) for i in range(ord('A'), ord('A') + n)]
 
 # Go directly to pth message (1-indexed)
 participants = set()
@@ -23,10 +28,9 @@ for i in range(p - 1, m):
 suspects = []
 # Subtract the elements from c to set(), to find who
 # did not participate in the conversation + self
-for p in person: 
-    if p not in participants:
-        suspects.append(p)
-
+for person in people: 
+    if person not in participants:
+        suspects.append(person)
 suspects.sort()
 
-print(" ".join(suspects))
+print(" ".join(res))
