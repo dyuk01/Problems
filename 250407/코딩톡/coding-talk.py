@@ -10,9 +10,23 @@ u = [int(msg[1]) for msg in messages]
 
 # M amount of message informations
 # Find who did not read the pth message
+person = [chr(i) for i in range(ord('A'), ord('A') + n)]
 
 # Go directly to pth message (1-indexed)
+participants = set()
 
 # Iterate from the pth to the end, and add to set()
+for i in range(p - 1, m):
+    if c[i] not in participants:
+        participants.add(c[i])
 
+suspects = []
 # Subtract the elements from c to set(), to find who
+# did not participate in the conversation + self
+for p in person: 
+    if p not in participants:
+        suspects.append(p)
+
+suspects.sort()
+
+print(" ".join(suspects))
