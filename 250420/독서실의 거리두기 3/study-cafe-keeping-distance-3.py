@@ -2,16 +2,26 @@ n = int(input())
 seats = input()
 
 # Please write your code here.
-positions = []
+occupied_seats = []
 for i in range(n):
-    if num == '1':
-        positions.append(i)
+    if seats[i] == '1':
+        occupied_seats.append(i)
 
 min_distance = float('inf')
-optPos = -1
 
-for pos in range(n):
-    if seats[pos] == '1':
+for curr_pos in range(n):
+    # Skip
+    if seats[curr_pos] == '1':
         continue
+    
+    curr_min_distance = float('inf')
+    for seat in occupied_seats:
+        distance = abs(curr_pos - seat)
+        curr_min_distance = min(curr_min_distance, distance)
+    
+    min_distance = min(min_distance, curr_min_distance)
+
+print(min_distance + 1)
+    
 
     
