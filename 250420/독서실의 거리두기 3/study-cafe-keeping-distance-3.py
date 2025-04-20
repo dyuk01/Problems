@@ -41,4 +41,28 @@ seats = input()
 #     else:
 #         min_dist = min(min_dist, dist)
 
-# print(min_dist)
+# print(min_dist)def solution() -> int:
+def solution() -> int:
+    occupied = []
+    for idx, s in enumerate(seats):
+        if s == "1":
+            occupied.append(idx)
+
+    dist = []
+    for i in range(1, len(occupied)):
+        dist.append(occupied[i] - occupied[i-1])
+
+    if min(dist) == 1:
+        return 1
+
+    max_dist = -float("inf")
+    for _ in range(len(dist)):
+        cur_dist = dist.pop(0)
+        dist.append(cur_dist // 2)
+        max_dist = max(max_dist, min(dist))
+        dist.pop(-1)
+        dist.append(cur_dist)
+
+    return max_dist
+
+print(solution())
