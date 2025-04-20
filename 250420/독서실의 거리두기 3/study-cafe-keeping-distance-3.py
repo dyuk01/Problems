@@ -34,13 +34,11 @@ while j < n:
         i = j
         j += 1
 
-
-print(distances)
 min_dist = float('inf')
 for dist in distances:
     min_dist = min(min_dist, dist)
 
-if min_dist == '1' or min_dist % 2 == 0:
+if min_dist == 1 or min_dist % 2 == 0:
     print(min_dist)
 else:
     print(min_dist // 2)
