@@ -23,22 +23,22 @@ seats = input()
 
 # print(min_distance + 1)
 
-distances = []
-i, j = 0, 1
-while j < n:
-    if seats[j] == '0':
-        j += 1
-    else:
-        distances.append(j - i)
-        i = j
-        j += 1
+# distances = []
+# i, j = 0, 1
+# while j < n:
+#     if seats[j] == '0':
+#         j += 1
+#     else:
+#         distances.append(j - i)
+#         i = j
+#         j += 1
 
-min_dist = float('inf')
-max_dist = max(distances)
-for dist in distances:
-    if dist == max_dist:
-        min_dist = min(min_dist, dist // 2)
-    else:
-        min_dist = min(min_dist, dist)
+# min_dist = float('inf')
+# max_dist = max(distances)
+# for dist in distances:
+#     if dist == max_dist:
+#         min_dist = min(min_dist, dist // 2)
+#     else:
+#         min_dist = min(min_dist, dist)
 
-print(min_dist)
+# print(min_dist)
