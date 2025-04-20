@@ -1,25 +1,43 @@
 n = int(input())
 arr = list(input().split())
 
-# Please write your code here.
-# sorted_arr = []
-# for ch in arr:
-#     sorted_arr.append(ord(ch))
 
-# sorted_arr.sort()
+# swap_count = 0
 
-# max_moves = -1
 # for i in range(n):
-#     max_moves = max(max_moves, abs(ord(arr[i]) - sorted_arr[i]))
+#     for j in range(0, n - i - 1):
+#         if arr[j] > arr[j + 1]:
+#             arr[j], arr[j + 1] = arr[j + 1], arr[j]
+#             swap_count += 1
 
-# print(max_moves)
+# print(swap_count)
 
-swap_count = 0
+def cnt_inversions(a):
+    if len(a) <= 1:
+        return a, 0
+    
+    mid = len(a) // 2
+    l, inv_l = cnt_inversions(a[:mid])
+    r, inv_r = cnt_inversions(a[mid:])
+    result, inv = merge(l, r)
+    return result, inv + inv_l + inv_r
 
-for i in range(n):
-    for j in range(0, n - i - 1):
-        if arr[j] > arr[j + 1]:
-            arr[j], arr[j+1] = arr[j+1], arr[j]
-            swap_count += 1
+def merge(l, r):
+    result = []
+    i, j, inv = 0, 0, 0
+    while i < len(l) and j < len(r):
+        if l[i] <= r[j]:
+            result.append(l[i])
+            i += 1
+        else:
+            result.append(r[j])
+            j += 1
+            inv += len(l) - i
+    result += l[i:] + r[j:]
+    return result, inv
 
-print(swap_count)
+def solution() -> int:
+    _, inv = cnt_inversions(arr)
+    return inv
+
+print(solution())
