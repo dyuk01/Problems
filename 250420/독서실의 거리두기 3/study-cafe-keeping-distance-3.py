@@ -29,25 +29,16 @@ while j < n:
     if seats[j] == '0':
         j += 1
     else:
-        if j - i - 1 != 0:
-            distances.append(j - i - 1)
+        distances.append(j - i)
         i = j
         j += 1
 
 min_dist = float('inf')
+max_dist = max(distances)
 for dist in distances:
-    min_dist = min(min_dist, dist)
+    if dist == max_dist:
+        min_dist = min(min_dist, dist // 2)
+    else:
+        min_dist = min(min_dist, dist)
 
-if min_dist == 1 or min_dist % 2 == 0:
-    print(min_dist)
-else:
-    print(min_dist // 2)
-# 10001001001
-# 3 2 2
-
-# 110001001000101
-# 3 2 3 1
-# pos = 0,1,5,8,12,14
-# dist = 
-
-    
+print(min_dist)
