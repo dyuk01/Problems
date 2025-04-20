@@ -3,7 +3,7 @@ arr = list(map(int, input().split()))
 
 # Please write your code here.
 
-max1, max2, max3 = -1, -1, -1
+max1, max2, max3 = -float('inf'), -float('inf'), -float('inf')
 min1, min2 = float('inf'), float('inf')
 
 for num in arr:
