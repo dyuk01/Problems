@@ -4,11 +4,17 @@ arr = list(map(int, input().split()))
 # Please write your code here.
 
 def solution()-> int:
-    total_population = sum(arr)
-    wifi_power = 2 * m + 1
-    wifi = total_population // wifi_power if total_population % wifi_power == 0 else total_population // wifi_power + 1
-    
-    return wifi
+    routers = 0
+    i = 0
+    while i < n:
+        if arr[i] == 0:
+            i += 1
+        else:
+            # install here (covers i–M … i+M), but since all < i are already covered,
+            # we just jump forward past the right edge:
+            routers += 1
+            i += 2 * m + 1
+    return routers
 
 print(solution())
 
