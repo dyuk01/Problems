@@ -1,5 +1,5 @@
 n = int(input())
-sequence = list(map(int, input().split()))
+seq = list(map(int, input().split()))
 
 # Please write your code here.
 
@@ -7,12 +7,15 @@ sequence = list(map(int, input().split()))
 
 # Pick a number at beginning
 
-count = 0
-for i in range(n):
-    for j in range(i, n - 1):
-        if sequence[j] > sequence[j + 1]:
-            count += 1
-            continue
+sorted_tail = 1
 
-print(count)
+for i in range(n - 2, -1, -1):
+    if seq[i] < seq[i + 1]:
+        sorted_tail += 1
+    else:
+        break
+
+print(n - steps)
+
+
 
