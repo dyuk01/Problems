@@ -17,6 +17,8 @@ def solution()-> int:
             if sequence[j] > sequence[j + 1]:
                 steps += 1
                 continue
+    
+    return steps
 
 print(solution())
 
