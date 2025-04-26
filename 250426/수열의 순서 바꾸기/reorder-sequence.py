@@ -15,7 +15,7 @@ for i in range(n - 2, -1, -1):
     else:
         break
 
-print(n - steps)
+print(n - sorted_tail)
 
 
 
