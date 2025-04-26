@@ -7,18 +7,12 @@ sequence = list(map(int, input().split()))
 
 # Pick a number at beginning
 
-def solution()-> int:
-    steps = 0
-    if sequence == sequence.sort():
-        return steps
+count = 0
+for i in range(n):
+    for j in range(i, n - 1):
+        if sequence[j] > sequence[j + 1]:
+            count += 1
+            continue
 
-    for i in range(n):
-        for j in range(i, n - 1):
-            if sequence[j] > sequence[j + 1]:
-                steps += 1
-                continue
-    
-    return steps
-
-print(solution())
+print(count)
 
