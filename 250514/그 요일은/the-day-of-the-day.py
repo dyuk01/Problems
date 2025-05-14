@@ -34,6 +34,11 @@ days = {
     'Sun' : 6
 }
 
+
 total_days -= days[A]
 
-print(total_days // 7 + 1)
+total_weeks = total_days / 7
+if total_weeks % 7 != 0:
+    total_weeks += 1
+
+print(int(total_weeks))
