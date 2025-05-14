@@ -37,8 +37,8 @@ days = {
 
 total_days -= days[A]
 
-total_weeks = total_days / 7
-if total_weeks % 7 != 0:
+total_weeks = total_days // 7
+if total_days % 7 != 0:
     total_weeks += 1
 
-print(int(total_weeks))
+print(total_weeks)
