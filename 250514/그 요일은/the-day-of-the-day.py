@@ -7,14 +7,14 @@ even_months = [4,6,9,11]
 extra_month = [2]
 
 # Find the total days within the time period.
-total_days, month_days = 0, 0
+total_days = 0
 for m in range(m1, m2 + 1):
     if m in odd_months:
-        month_days += 31
+        month_days = 31
     elif m in even_months:
-        month_days += 30
+        month_days = 30
     else:
-        month_days += 29
+        month_days = 29
     
     total_days += month_days
     if m == m2:
