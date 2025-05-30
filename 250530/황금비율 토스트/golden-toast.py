@@ -114,4 +114,113 @@
 
 # dll.print_list()
     
+from typing import Optional
+
+n, m = map(int, input().split())
+s = input()
+
+commands = []
+for _ in range(m):
+    cmd = input().split()
+    if len(cmd) == 1:
+        commands.append((cmd[0], ""))
+    else:
+        commands.append((cmd[0], cmd[1]))
+
+
+class Node:
+    def __init__(self, data: str):
+        self.data = data
+        self.prev: Optional['Node'] = None
+        self.next: Optional['Node'] = None
+
+class DLL:
+    def __init__(self):
+        self.head: Optional[Node] = None
+        self.tail: Optional[Node] = None
+
+    def begin(self) -> Node:
+        return self.head
+
+    def end(self) -> Node:
+        return self.tail
+
+    def push_back(self, data: str) -> None:
+        new_node = Node(data)
+        if self.head is None and self.tail is None:
+            self.head = new_node
+        else:
+            new_node.prev = self.tail
+            self.tail.next = new_node
+        self.tail = new_node
+
+    def move_left(self, it: Node) -> Optional[Node]:
+        if it is not self.head:
+            return it.prev
     
+    def move_right(self, it: Node) -> Node:
+        if it is not self.tail:
+            return it.next
+    
+    def remove(self, it: Node) -> None:
+        # Nothing to delete at tail.
+        if it == self.tail:
+            return
+        
+        # If removing the tail, just pop back.
+        if it.next == self.tail:
+            self.tail = it
+            self.tail.next = None
+            return
+        
+        # Redirect.
+        temp = it.next.next
+        temp.prev = it
+        it.next = temp
+        
+    def insert(self, data: str, it: Optional[Node]) -> Optional[Node]:
+        # If inserting at the tail, just push back.        
+        if it == self.tail:
+            self.push_back(data)
+            return self.tail
+        
+        # Insert in the middle.
+        new_node = Node(data)
+        it.next.prev = new_node        
+        new_node.next = it.next
+        new_node.prev = it
+        it.next = new_node
+        return new_node
+
+    def print(self) -> str:
+        answer = ""
+        i = self.head
+        while i is not None:
+            answer += i.data
+            i = i.next
+        return answer
+
+def solution() -> str:
+    dll = DLL()
+
+    # Populate DLL for input s.
+    dll.push_back("")
+    for i in range(n):
+        dll.push_back(s[i])
+    
+    it = dll.end()
+    # Iterate cmds.
+    for c, d in commands:
+        if c == "L":
+            it = dll.move_left(it)
+        elif c == "R":
+            it = dll.move_right(it)
+        elif c == "D":
+            dll.remove(it)
+        elif c == "P":
+            it = dll.insert(d, it)
+    
+    return dll.print()
+
+# if __name__ == "main":
+print(solution())
