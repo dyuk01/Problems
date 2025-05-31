@@ -7,8 +7,10 @@ for i in range(n):
         if arr[j] > arr[j + 1]:
             arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
-res = ""
-for c in arr:
-    res += str(c) + " "
+# res = ""
+# for c in arr:
+#     res += str(c) + " "
 
-print(res)
+# print(res)
+
+print(" ".join(map(str, arr)))
