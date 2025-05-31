@@ -14,8 +14,8 @@ from typing import Optional
 
 class Partition:
     def __init__(self):
-        self.prev: Optional['Node'] = None
-        self.next: Optional['Node'] = None
+        self.prev: Optional[Node] = None
+        self.next: Optional[Node] = None
 
 class Node:
     def __init__(self, data):
@@ -25,105 +25,99 @@ class Node:
 
 class DLL:
     def __init__(self, s):
-        self.head = Partition()
-        curr_partition = self.head
+        curr_part = Partition()
+        self.head = curr_part
+        self.tail = curr_part
 
         for ch in s:
             new_node = Node(ch)
-            new_partition = Partition()
+            new_part = Partition()
+            new_node.next = new_part
+            new_part.prev = new_node
 
-            new_node.prev = curr_partition
-            curr_partition.next = new_node
+            new_node.prev = self.tail
+            self.tail.next = new_node
 
-            new_partition.prev = new_node
-            new_node.next = new_partition
-
-            curr_partition = new_partition
+            self.tail = new_part
         
-        self.tail = curr_partition
-        self.curr = self.tail
     
-    def left(self):
-        if self.curr.prev and self.curr.prev.prev:
-            self.curr = self.curr.prev.prev
-    
-    def right(self):
-        if self.curr.next and self.curr.next.next:
-            self.curr = self.curr.next.next
-    
-    def delete(self):
-        if not self.curr.next:
-            return
+    def left(self, cursor):
+        if cursor != self.head:
+            return cursor.prev.prev
+        return cursor
         
-        node = self.curr.next
-        next_partition = node.next
+    
+    def right(self, cursor):
+        if cursor != self.tail:
+            return cursor.next.next
+        return cursor
 
-        if next_partition == self.tail:
-            # Delete last node
-            self.curr.next = None
-            self.tail = self.curr
-        elif self.curr == self.head:
+
+    def delete(self, cursor):
+        if cursor == self.tail:
+            return cursor
+
+        if cursor == self.head:
             # Delete first node
-            if next_partition and next_partition.next:
-                self.curr.next = next_partition.next
-                next_partition.next.prev = self.curr
-            else:
-                self.curr.next = None
-        else:
-            # Delete middle node
-            self.curr.next = next_partition
-            if next_partition:
-                next_partition.prev = self.curr
+            self.head = cursor.next.next
+            self.head.prev.next = None
+            self.head.prev = None
+            return self.head
 
+        if cursor.next.next == self.tail:
+            self.tail = cursor
+            self.tail.next.prev = None
+            self.tail.next = None
+            return self.tail
+        
+        next_node = cursor.next.next.next
+        cursor.next = next_node
+        next_node.prev = cursor
+        return cursor
+        
 
-    def paste(self, c):
+    def paste(self, c, cursor):
         new_node = Node(c)
-        new_partition = Partition()
+        new_part = Partition()
+        new_node.next = new_part
+        new_part.prev = new_node
 
-        # Insert the new node and partition
-        old_next = self.curr.next
-        
-        # Connect current partition to new node
-        self.curr.next = new_node
-        new_node.prev = self.curr
-        
-        # Connect new node to new partition
-        new_node.next = new_partition
-        new_partition.prev = new_node
-        
-        # Connect new partition to what was originally next
-        new_partition.next = old_next
+        old_next = cursor.next
+        new_part.next = old_next
         if old_next:
-            old_next.prev = new_partition
+            old_next.prev = new_part
         else:
-            # If we're at the end, update tail
-            self.tail = new_partition
+            self.tail = new_part
 
-        # Move cursor to the new partition
-        self.curr = new_partition
+        cursor.next = new_node
+        new_node.prev = cursor
+
+        return new_part
     
+
     def print_string(self):
-        res = []
-        node = self.head.next
-        while node and isinstance(node, Node):
-            res.append(node.data)
-            if node.next:
-                node = node.next.next
-            else:
-                break
-        return ''.join(res)
+        string = ""
+        curr = self.head
+        while curr != self.tail:
+            string += curr.next.data
+            curr = curr.next.next
+        return string
+
+        
 
 dll = DLL(s)
 
+cursor = dll.tail
 for command in commands:
     cmd = command[0]
     if cmd == 'L':
-        dll.left()
+        cursor = dll.left(cursor)
     elif cmd == 'R':
-        dll.right()
+        cursor = dll.right(cursor)
     elif cmd == 'D':
-        dll.delete()
+        cursor = dll.delete(cursor)
     elif cmd == 'P':
-        dll.paste(command[1])
+        cursor = dll.paste(command[1], cursor)
 
 print(dll.print_string())
+
