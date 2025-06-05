@@ -10,7 +10,7 @@ for pos in range(k - 1, -1, -1):
     arr_new = [[] for _ in range(10)]
 
     for num in arr:
-        digit = num // (10 ** pos)
+        digit = (num // (10 ** pos)) % 10
         arr_new[digit].append(num)
     
     res = []
