@@ -40,12 +40,12 @@ n = int(input())
 arr = list(map(int, input().split()))
 
 def pad_nums(n: int, digit: int) -> str:
-    # return str(n).zfill(digit)
+    return str(n).zfill(digit)
     # return f"{n:0{digit}d}"
-    x = ""
-    for _ in range(digit - len(str(n))):
-        n += "0"
-    return x + str(n)
+    # x = ""
+    # for _ in range(digit - len(str(n))):
+    #     n += "0"
+    # return x + str(n)
     
 
 def flatten(radix: Dict[int, List[str]]) -> List[str]:
