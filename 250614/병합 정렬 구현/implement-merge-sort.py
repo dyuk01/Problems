@@ -1,43 +1,35 @@
-def mergesort(arr, low, high):
-    if low < high:
-        mid = (low + high) // 2
-        mergesort(arr, low, mid)
-        mergesort(arr, mid + 1, high)
-        merge(arr, low, mid, high)
+n = int(input())
+arr = list(map(int, input().split()))
 
-def merge(arr, low, mid, high):
-    temp = [0] * (high - low + 1)
-    i, j, k = low, mid + 1, 0
+def mergesort(arr: list)-> list:
+    if len(arr) == 1:
+        return arr
+
+    mid = len(arr) // 2
+    left_arr = mergesort(arr[:mid])
+    right_arr = mergesort(arr[mid:])
+
+    return merge(left_arr, right_arr)
+
+def merge(left: list, right: list)-> list:
+    sorted_arr = []
+    i, j = 0, 0
 
     # Both lists in bound
-    while i <= mid and j <= high:
+    while i < len(left) and j < len(right):
         # Left list smaller
-        if arr[i] <= arr[j]:
-            temp[k] = arr[i]
+        if left[i] <= right[j]:
+            sorted_arr.append(left[i])
             i += 1
         # Right list smaller
         else:
-            temp[k] = arr[j]
+            sorted_arr.append(right[j])
             j += 1
-        k += 1
+    
+    sorted_arr.extend(left[i:])
+    sorted_arr.extend(right[j:])
 
-    # Merge leftover left list
-    while i <= mid:
-        temp[k] = arr[i]
-        i += 1
-        k += 1
+    return sorted_arr
 
-    # Merge leftover right list
-    while j <= high:
-        temp[k] = arr[j]
-        j += 1
-        k += 1
-
-    # Copy back to original array
-    for i in range(len(temp)):
-        arr[low + i] = temp[i]
-
-n = int(input())
-arr = list(map(int, input().split()))
-mergesort(arr, 0, len(arr) - 1)
-print(' '.join(map(str, arr)))
+res = mergesort(arr)
+print(' '.join(map(str, res)))
