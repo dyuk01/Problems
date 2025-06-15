@@ -8,8 +8,8 @@ arr = list(map(int, input().split()))
 # Compare and sort
 def heapify(arr: List[int], n: int, i: int) -> None:
     largest = i
-    left = 2 * i + 1
-    right = 2 * i + 2
+    left = 2 * i
+    right = 2 * i + 1
 
     if left < n and arr[left] > arr[largest]:
         largest = left
