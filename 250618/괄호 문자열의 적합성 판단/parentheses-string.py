@@ -70,6 +70,6 @@ def solution() -> bool:
     return len(stack) == 0
 
 if solution():
-    print("YES")
+    print("Yes")
 else:
-    print("NO")
+    print("No")
