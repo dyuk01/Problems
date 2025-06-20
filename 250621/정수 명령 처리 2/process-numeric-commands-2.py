@@ -44,9 +44,9 @@ class Queue:
 def solution() -> None:
     q = Queue()
     for i in range(n):
-        cmd = command[i]
+        cmd = commands[i]
         if cmd == "push":
-            q.push(a[i])
+            q.push(values[i])
         elif cmd == "pop":
             print(q.pop())
         elif cmd == "size":
