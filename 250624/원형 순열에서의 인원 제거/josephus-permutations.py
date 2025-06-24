@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List
 
 n, k = map(int, input().split())
@@ -5,37 +6,17 @@ n, k = map(int, input().split())
 # Please write your code here.
 # Removes k - 1'th push element
 
-class Queue:
-
-    queue: List[int]
-
-    def __init__(self):
-        self.queue = []
-    
-
-    def size(self) -> int:
-        return len(self.queue)
-    
-
-    def push(self, val: int) -> None:
-        self.queue.append(val)
-    
-
-    def pop(self) -> int:
-        return self.queue.pop(0)
-
-
 def solution() -> List[int]:
-    queue = Queue()
+    dq = deque()
     for i in range(1, n+1):
-        queue.push(i)
+        dq.append(i)
 
     res = []
-    while queue.size() > 1:
+    while len(dq) > 1:
         for _ in range(k-1):
-            queue.push(queue.pop())
-        res.append(queue.pop())
-    res.append(queue.pop())
+            dq.append(dq.popleft())
+        res.append(dq.popleft())
+    res.append(dq.popleft())
     
     return res
 
