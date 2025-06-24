@@ -13,8 +13,8 @@ class Queue:
         self.queue = []
     
 
-    def empty(self) -> bool:
-        return not self.queue
+    def size(self) -> int:
+        return len(self.queue)
     
 
     def push(self, val: int) -> None:
@@ -31,10 +31,11 @@ def solution() -> List[int]:
         queue.push(i)
 
     res = []
-    while not queue.empty():
+    while queue.size() > 1:
         for _ in range(k-1):
             queue.push(queue.pop())
         res.append(queue.pop())
+    res.append(queue.pop())
     
     return res
 
